@@ -1,0 +1,11 @@
+{
+  "version": 2,
+  "dgSpecHash": "8b4SzUlE+/JernOb0ktSfkan2KIdBp64QWYaUoR/+zQE7wTkEoY6ZJkgTyA5aVAKO9tMIfdjqsOoOBI80UFjoA==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\Mabel\\Desktop\\RaroAcademy\\Projetos\\demys_universidade\\demys_universidade\\demys_universidade.Domain\\demys_universidade.Domain.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\Mabel\\.nuget\\packages\\bcrypt.net-next\\4.0.3\\bcrypt.net-next.4.0.3.nupkg.sha512",
+    "C:\\Users\\Mabel\\.nuget\\packages\\newtonsoft.json\\13.0.1\\newtonsoft.json.13.0.1.nupkg.sha512"
+  ],
+  "logs": []
+}
