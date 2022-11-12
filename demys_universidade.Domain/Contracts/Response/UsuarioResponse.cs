@@ -12,15 +12,15 @@ namespace demys_universidade.Domain.Contracts.Response
 {
     public class UsuarioResponse : BaseResponse
     {
-        public int CursoId { get; set; }
-
         public string Nome { get; set; }
 
         public string CPF { get; set; }
 
-        public Perfil Perfil { get; set; }
+        public PerfilResponse Perfil { get; set; }
 
         public DateTime DataNascimento { get; set; }
+
+        public int CursoId { get; set; }
 
         public EnderecoResponse Endereco { get; set; }
     }

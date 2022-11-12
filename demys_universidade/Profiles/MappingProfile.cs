@@ -15,6 +15,8 @@ namespace demys_universidade.Profiles
             CreateMap<CursoRequest, Curso>();
             CreateMap<DepartamentoRequest, Departamento>();
             CreateMap<EnderecoRequest, Endereco>();
+            CreateMap<PerfilRequest, Perfil>();
+
 
 
             #endregion
@@ -24,10 +26,12 @@ namespace demys_universidade.Profiles
             CreateMap<Departamento, DepartamentoResponse>().ReverseMap();
             CreateMap<Usuario, UsuarioResponse>().ReverseMap();
             CreateMap<Endereco, EnderecoResponse>().ReverseMap();
+            CreateMap<Perfil, PerfilResponse>().ReverseMap();
+
 
             #endregion
 
-            #region HttpApi Map
+            #region HttpApi Response to Entity
             CreateMap<BrasilCep, EnderecoResponse>()
                 .ForMember(p => p.CEP, map => map.MapFrom(s => s.Cep))
                 .ForMember(p => p.Rua, map => map.MapFrom(s => s.Street))

@@ -1,4 +1,5 @@
-﻿using demys_universidade.Domain.Contracts.Response;
+﻿using demys_universidade.Domain.Contracts.Request;
+using demys_universidade.Domain.Contracts.Response;
 using demys_universidade.Domain.Interfaces.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
@@ -25,7 +26,7 @@ namespace demys_universidade.Controllers
 
         [HttpPost]
         [ProducesResponseType(200)]
-        public async Task<ActionResult<AutenticaoResponse>> PostAsync([FromBody] AutenticaoRequest request)
+        public async Task<ActionResult<AutenticacaoResponse>> PostAsync([FromBody] AutenticacaoRequest request)
         {
             var response = await _usuarioService.AutenticarAsync(request.CPF, request.Senha);
             return Ok(response);

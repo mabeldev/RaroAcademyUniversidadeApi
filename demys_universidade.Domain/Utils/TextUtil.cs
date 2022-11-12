@@ -28,5 +28,14 @@ namespace demys_universidade.Domain.Utils
                     return 500;
             }
         }
+
+        public static int? ToInt(this string value)
+        {
+            int result;
+            if (int.TryParse(value, out result))
+                return result;
+            return null;
+        }
+
     }
 }

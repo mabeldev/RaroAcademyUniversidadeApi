@@ -4,22 +4,29 @@ using demys_universidade.Domain.Contracts.Response;
 using demys_universidade.Domain.Entities;
 using demys_universidade.Domain.Interfaces.Services;
 using demys_universidade.Domain.Services;
+using demys_universidade.Domain.Utils;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace demys_universidade.Controllers
 {
+    [Authorize(Roles = ConstanteUtil.PerfilLogadoNome)]
     public class UsuarioController : BaseController<Usuario, UsuarioRequest, UsuarioResponse>
     {
+        #region Constructor
+
         private readonly IMapper _mapper;
         private readonly IUsuarioService _usuarioService;
 
-        public UsuarioController(IMapper mapper, IUsuarioService service) : base(mapper, service)
+        public UsuarioController(IMapper mapper, IUsuarioService service) : base (mapper, service)
         {
             _mapper = mapper;
             _usuarioService = service;
         }
 
+        #endregion
+
+        #region Post (Allows Anonymous)
         [HttpPost]
         [AllowAnonymous]
         [ProducesResponseType(201)]
@@ -29,13 +36,46 @@ namespace demys_universidade.Controllers
             await _usuarioService.CriarUsuarioAsync(entity);
             return Created(nameof(PostAsync), new { id = entity.Id });
         }
+        #endregion
 
+        #region Get
+        [HttpGet("{id}")]
+        [ProducesResponseType(200)]
+        public override async Task<ActionResult<UsuarioResponse>> GetByIdAsync([FromRoute] int id)
+        {
+            var entity = await _usuarioService.ObterPorIdUsuarioAsync(id);
+            return Ok(_mapper.Map<UsuarioResponse>(entity));
+        }
+
+        #endregion
+
+        #region Obter Por Nome
+        [HttpGet("nome")]
+        [ProducesResponseType(200)]
+        public async Task<ActionResult<List<UsuarioResponse>>> GetAsync([FromQuery] string nome)
+        {
+            var entities = await _usuarioService.ObterTodosAsync(x => x.Nome.Contains(nome));
+            var response = _mapper.Map<List<UsuarioResponse>>(entities);
+            return Ok(response);
+        }
+
+        #endregion
+
+        #region Alterar Data De Nascimento
+        [HttpPatch("{id}")]
+        [ProducesResponseType(200)]
+        public async Task<ActionResult> PatchAsync([FromRoute] int id, [FromBody] UsuarioDataNascimentoRequest request)
+        {
+            await _usuarioService.AtualizarDataNascimentoAsync(id, request.DataNascimento);
+            return Ok();
+        }
+
+        #endregion
+
+        #region Put
         [HttpPut("{id}")]
         [ProducesResponseType(204)]
-        public override async Task<ActionResult> PutAsync(
-            [FromRoute] int id,
-            [FromBody] UsuarioRequest request
-        )
+        public override async Task<ActionResult> PutAsync([FromRoute] int id, [FromBody] UsuarioRequest request)
         {
             var entity = _mapper.Map<Usuario>(request);
             entity.Id = id;
@@ -43,14 +83,8 @@ namespace demys_universidade.Controllers
             return NoContent();
         }
 
-        [HttpGet("nome/{nome}")]
-        [ProducesResponseType(200)]
-        public virtual async Task<ActionResult> GetPorNome([FromRoute] string nome)
-        {
-            var entity = await _usuarioService.GetPorNome(nome);
-            var usuario = _mapper.Map<UsuarioResponse>(entity);
-            return Ok(usuario);
-        }
+        #endregion
+
     }
 
 }

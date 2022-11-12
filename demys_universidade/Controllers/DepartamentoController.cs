@@ -4,14 +4,19 @@ using demys_universidade.Domain.Contracts.Response;
 using demys_universidade.Domain.Entities;
 using demys_universidade.Domain.Interfaces.Services;
 using demys_universidade.Domain.Services;
+using demys_universidade.Domain.Utils;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace demys_universidade.Controllers
 {
+    [Authorize(Roles = ConstanteUtil.PerfilLogadoNome)]
+
     public class DepartamentoController
         : BaseController<Departamento, DepartamentoRequest, DepartamentoResponse>
     {
+
+        #region Constructor
         private readonly IMapper _mapper;
         private readonly IDepartamentoService _departamentoService;
 
@@ -22,6 +27,9 @@ namespace demys_universidade.Controllers
             _departamentoService = service;
         }
 
+        #endregion
+
+        #region Post (Allow Anonymous)
         [HttpPost]
         [AllowAnonymous]
         [ProducesResponseType(201)]
@@ -32,14 +40,8 @@ namespace demys_universidade.Controllers
             return Created(nameof(PostAsync), new { id = entity.Id });
         }
 
-        //[HttpGet("nome/{nome}")]
-        //[ProducesResponseType(201)]
-        //public async Task<ActionResult> GetPorNome([FromRoute] string nome)
-        //{
-        //    var entity = await _departamentoService.GetPorNome(nome);
-        //    var departamento = _mapper.Map<DepartamentoResponse>(entity);
-        //    return Ok(departamento);
-        //}
+        #endregion
+
     }
 }
 

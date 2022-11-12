@@ -9,6 +9,6 @@ namespace demys_universidade.Domain.Interfaces.Services
 {
     public interface ICursoService : IBaseService<Curso>
     {
-        //Task<Curso> GetPorTurno(Turno turno);
+
     }
 }

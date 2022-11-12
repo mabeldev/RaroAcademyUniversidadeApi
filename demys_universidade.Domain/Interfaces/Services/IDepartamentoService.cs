@@ -9,6 +9,6 @@ namespace demys_universidade.Domain.Interfaces.Services
 {
     public interface IDepartamentoService : IBaseService<Departamento>
     {
-        //Task<Departamento> GetPorNome(string nome);
+        
     }
 }

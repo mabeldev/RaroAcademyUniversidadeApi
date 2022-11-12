@@ -7,6 +7,5 @@ namespace demys_universidade.Infrastructure.Repositories
     public class UsuarioRepository : BaseRepository<Usuario>, IUsuarioRepository
     {
         public UsuarioRepository(UniversidadeContext context) : base(context) { }
-
     }
 }

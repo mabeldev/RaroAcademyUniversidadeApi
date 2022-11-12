@@ -10,5 +10,6 @@ namespace demys_universidade.Domain.Settings
     {
         public string SqlServerConnection { get; set; }
         public string ApiCep { get; set; }
+        public string JwtSecurityKey { get; set; }
     }
 }

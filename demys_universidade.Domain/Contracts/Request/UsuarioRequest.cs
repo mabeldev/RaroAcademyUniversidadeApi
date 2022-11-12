@@ -12,9 +12,6 @@ namespace demys_universidade.Domain.Contracts.Request
 {
     public class UsuarioRequest
     {
-        [Required(ErrorMessage = "CursoId é obrigatório em usuário.")]
-        public int CursoId { get; set; }
-
         [Required(ErrorMessage = "Nome é obrigatório.")]
         [StringLength(40, MinimumLength = 3)]
         public string Nome { get; set; }
@@ -30,11 +27,13 @@ namespace demys_universidade.Domain.Contracts.Request
         public string CPF { get; set; }
 
         [Required(ErrorMessage = "Perfil é obrigatório.")]
-        //[JsonConverter(typeof(StringEnumConverter))]
-        public Perfil Perfil { get; set; }
+        public int PerfilId { get; set; }
 
         [Required(ErrorMessage = "Data de Nascimento é obrigatório.")]
         public DateTime DataNascimento { get; set; }
+
+        [Required(ErrorMessage = "CursoId é obrigatório em usuário.")]
+        public int CursoId { get; set; }
 
         [Required(ErrorMessage = "Endereco é obrigatório.")]
         public EnderecoRequest Endereco { get; set; }

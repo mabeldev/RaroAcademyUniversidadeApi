@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace demys_universidade.Domain.Entities
 {
-    public enum Perfil
+    public class Perfil : BaseEntity
     {
-        Aluno,
-        Professor
+        public string Nome { get; set; }
+        public virtual ICollection<Usuario> Usuarios { get; set; }
     }
 }

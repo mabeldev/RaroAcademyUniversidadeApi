@@ -11,6 +11,7 @@
         #region ForingKeyId
         public int CursoId { get; set; }
         public int EnderecoId { get; set; }
+        public int PerfilId { get; set; }
 
         #endregion
 

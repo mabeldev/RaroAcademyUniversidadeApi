@@ -24,7 +24,8 @@ namespace demys_universidade.Filters
             else
             {
                 response.Codigo = StatusException.Erro;
-                response.Mensagens.Add("Erro inesperado");
+                response.Mensagens.Add("Erro Inesperado");
+                response.Mensagens = new List<string> { "Erro Inesperado"};
                 response.Detalhe = context.Exception?.InnerException?.Message;
             }
 
