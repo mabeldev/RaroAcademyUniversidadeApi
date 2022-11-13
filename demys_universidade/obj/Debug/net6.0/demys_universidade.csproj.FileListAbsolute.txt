@@ -275,3 +275,4 @@ C:\Users\Mabel\Desktop\RaroAcademy\Projetos\demys_universidade\demys_universidad
 C:\Users\Mabel\Desktop\RaroAcademy\Projetos\demys_universidade\demys_universidade\demys_universidade\bin\Debug\net6.0\runtimes\win\lib\net6.0\System.Windows.Extensions.dll
 C:\Users\Mabel\Desktop\RaroAcademy\Projetos\demys_universidade\demys_universidade\demys_universidade\bin\Debug\net6.0\demys_universidade.xml
 C:\Users\Mabel\Desktop\RaroAcademy\Projetos\demys_universidade\demys_universidade\demys_universidade\obj\Debug\net6.0\demys_universidade.xml
+C:\Users\Mabel\Desktop\RaroAcademy\Projetos\demys_universidade\demys_universidade\demys_universidade\bin\Debug\net6.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll

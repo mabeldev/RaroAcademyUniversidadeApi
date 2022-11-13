@@ -139,6 +139,37 @@ namespace demys_universidade.Infrastructure.Migrations
                     b.ToTable("Enderecos");
                 });
 
+            modelBuilder.Entity("demys_universidade.Domain.Entities.Perfil", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<bool>("Ativo")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime?>("DataAlteracao")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("DataInclusao")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Nome")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("UsuarioAlteracao")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("UsuarioInclusao")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Perfis");
+                });
+
             modelBuilder.Entity("demys_universidade.Domain.Entities.Usuario", b =>
                 {
                     b.Property<int>("Id")
@@ -174,9 +205,8 @@ namespace demys_universidade.Infrastructure.Migrations
                     b.Property<string>("Nome")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Perfil")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("PerfilId")
+                        .HasColumnType("int");
 
                     b.Property<string>("Senha")
                         .HasColumnType("nvarchar(max)");
@@ -193,6 +223,8 @@ namespace demys_universidade.Infrastructure.Migrations
 
                     b.HasIndex("EnderecoId")
                         .IsUnique();
+
+                    b.HasIndex("PerfilId");
 
                     b.ToTable("Usuarios");
                 });
@@ -233,12 +265,25 @@ namespace demys_universidade.Infrastructure.Migrations
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
+                    b.HasOne("demys_universidade.Domain.Entities.Perfil", "Perfil")
+                        .WithMany("Usuarios")
+                        .HasForeignKey("PerfilId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.Navigation("Curso");
 
                     b.Navigation("Endereco");
+
+                    b.Navigation("Perfil");
                 });
 
             modelBuilder.Entity("demys_universidade.Domain.Entities.Curso", b =>
+                {
+                    b.Navigation("Usuarios");
+                });
+
+            modelBuilder.Entity("demys_universidade.Domain.Entities.Perfil", b =>
                 {
                     b.Navigation("Usuarios");
                 });

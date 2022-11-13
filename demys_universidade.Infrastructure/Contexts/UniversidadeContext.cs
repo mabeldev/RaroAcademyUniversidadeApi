@@ -12,12 +12,15 @@ namespace demys_universidade.Infrastructure.Contexts
         public DbSet<Curso> Cursos { get; set; }
         public DbSet<Departamento> Departamentos { get; set; }
         public DbSet<Endereco> Enderecos { get; set; }
+        public DbSet<Perfil> Perfis { get; set; }
+
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Usuario>(new UsuarioMap().Configure);
             modelBuilder.Entity<Curso>(new CursoMap().Configure);
             modelBuilder.Entity<Departamento>(new DepartamentoMap().Configure);
+
         }
 
     }

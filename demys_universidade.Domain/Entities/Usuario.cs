@@ -18,7 +18,7 @@
         #region ForingKeyReference
         public virtual Curso Curso { get; set; }
         public virtual Endereco Endereco { get; set; }
-        public Perfil Perfil { get; set; }
+        public virtual Perfil Perfil { get; set; }
 
         #endregion
     }

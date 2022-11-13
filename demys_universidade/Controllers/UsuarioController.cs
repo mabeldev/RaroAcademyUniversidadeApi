@@ -54,7 +54,7 @@ namespace demys_universidade.Controllers
         [ProducesResponseType(200)]
         public async Task<ActionResult<List<UsuarioResponse>>> GetAsync([FromQuery] string nome)
         {
-            var entities = await _usuarioService.ObterTodosAsync(x => x.Nome.Contains(nome));
+            var entities = await _usuarioService.ObterTodosAsync(x => x.Nome.Equals(nome));
             var response = _mapper.Map<List<UsuarioResponse>>(entities);
             return Ok(response);
         }

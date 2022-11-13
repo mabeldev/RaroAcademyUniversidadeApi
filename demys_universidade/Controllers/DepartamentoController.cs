@@ -42,6 +42,29 @@ namespace demys_universidade.Controllers
 
         #endregion
 
+        #region Obter Por Nome
+        [HttpGet("nome")]
+        [ProducesResponseType(200)]
+        public async Task<ActionResult<List<DepartamentoResponse>>> GetAsync([FromQuery] string nome)
+        {
+            var entities = await _departamentoService.ObterTodosAsync(x => x.Nome.Equals(nome));
+            var response = _mapper.Map<List<DepartamentoResponse>>(entities);
+            return Ok(response);
+        }
+
+        #endregion
+
+        #region Alterar Nome
+        [HttpPatch("{id}")]
+        [ProducesResponseType(200)]
+        public async Task<ActionResult> PatchAsync([FromRoute] int id, [FromBody] DepartamentoNomeRequest request)
+        {
+            await _departamentoService.AtualizarNomeAsync(id, request.Nome);
+            return Ok();
+        }
+
+        #endregion
+
     }
 }
 

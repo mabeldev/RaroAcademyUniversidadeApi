@@ -18,10 +18,12 @@ namespace demys_universidade.Infrastructure.Mappings
                 .WithOne()
                 .IsRequired()
                 .OnDelete(DeleteBehavior.Restrict);
-            builder.Property(p => p.Perfil).HasConversion(
-                    prop => prop.ToString(),
-                    prop => (Perfil)Enum.Parse(typeof(Perfil), prop)
-                );
+
+            builder
+                .HasOne(prop => prop.Perfil)
+                .WithMany(prop => prop.Usuarios)
+                .HasForeignKey(prop => prop.PerfilId)
+                .IsRequired();
         }
 
     }

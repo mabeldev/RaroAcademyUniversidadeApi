@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace demys_universidade.Infrastructure.Migrations
 {
-    public partial class InitialCreate : Migration
+    public partial class FirstMigration : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -28,6 +28,24 @@ namespace demys_universidade.Infrastructure.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Enderecos", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Perfis",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Nome = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Ativo = table.Column<bool>(type: "bit", nullable: false),
+                    UsuarioInclusao = table.Column<int>(type: "int", nullable: true),
+                    DataInclusao = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    UsuarioAlteracao = table.Column<int>(type: "int", nullable: true),
+                    DataAlteracao = table.Column<DateTime>(type: "datetime2", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Perfis", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -94,7 +112,7 @@ namespace demys_universidade.Infrastructure.Migrations
                     DataInicio = table.Column<DateTime>(type: "datetime2", nullable: false),
                     CursoId = table.Column<int>(type: "int", nullable: false),
                     EnderecoId = table.Column<int>(type: "int", nullable: false),
-                    Perfil = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    PerfilId = table.Column<int>(type: "int", nullable: false),
                     Ativo = table.Column<bool>(type: "bit", nullable: false),
                     UsuarioInclusao = table.Column<int>(type: "int", nullable: true),
                     DataInclusao = table.Column<DateTime>(type: "datetime2", nullable: false),
@@ -116,6 +134,12 @@ namespace demys_universidade.Infrastructure.Migrations
                         principalTable: "Enderecos",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Usuarios_Perfis_PerfilId",
+                        column: x => x.PerfilId,
+                        principalTable: "Perfis",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(
@@ -140,6 +164,11 @@ namespace demys_universidade.Infrastructure.Migrations
                 table: "Usuarios",
                 column: "EnderecoId",
                 unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Usuarios_PerfilId",
+                table: "Usuarios",
+                column: "PerfilId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -149,6 +178,9 @@ namespace demys_universidade.Infrastructure.Migrations
 
             migrationBuilder.DropTable(
                 name: "Cursos");
+
+            migrationBuilder.DropTable(
+                name: "Perfis");
 
             migrationBuilder.DropTable(
                 name: "Departamentos");

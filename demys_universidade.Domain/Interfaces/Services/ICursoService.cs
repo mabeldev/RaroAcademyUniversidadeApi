@@ -9,6 +9,7 @@ namespace demys_universidade.Domain.Interfaces.Services
 {
     public interface ICursoService : IBaseService<Curso>
     {
+        Task AtualizarNomeAsync(int id, string nome);
 
     }
 }
